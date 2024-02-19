@@ -1,0 +1,14 @@
+create user table
+
+CREATE TABLE `hotelmanage`.`user` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(200) NULL,
+  `email` VARCHAR(100) NULL,
+  `password` VARCHAR(50) NULL,
+  `secquestion` VARCHAR(200) NULL,
+  `answer` VARCHAR(200) NULL,
+  `address` VARCHAR(200) NULL,
+  `status` VARCHAR(20) NULL,
+  PRIMARY KEY (`id`));
+
+
