@@ -144,6 +144,11 @@ public class Login extends javax.swing.JFrame {
         txtSignup1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtSignup1.setForeground(new java.awt.Color(51, 102, 0));
         txtSignup1.setText("Forgot password?");
+        txtSignup1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtSignup1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -304,6 +309,11 @@ public class Login extends javax.swing.JFrame {
         txtPass.setText("");
     }//GEN-LAST:event_btnClearActionPerformed
 
+    private void txtSignup1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSignup1MouseClicked
+        this.dispose();
+        new ForgotPass().setVisible(true);
+    }//GEN-LAST:event_txtSignup1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -342,17 +352,11 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnLogin;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JTextField txtEmail;
