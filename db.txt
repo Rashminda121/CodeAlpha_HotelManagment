@@ -5,10 +5,18 @@ CREATE TABLE `hotelmanage`.`user` (
   `name` VARCHAR(200) NULL,
   `email` VARCHAR(100) NULL,
   `password` VARCHAR(50) NULL,
-  `secquestion` VARCHAR(200) NULL,
+  `question` VARCHAR(200) NULL,
   `answer` VARCHAR(200) NULL,
   `address` VARCHAR(200) NULL,
   `status` VARCHAR(20) NULL,
   PRIMARY KEY (`id`));
 
 
+table room
+
+CREATE TABLE `hotelmanage`.`room` (
+  `rno` VARCHAR(50) NOT NULL,
+  `rtype` VARCHAR(100) NULL,
+  `bed` VARCHAR(100) NULL,
+  `price` INT NULL,
+  `status` VARCHAR(20) NULL);
