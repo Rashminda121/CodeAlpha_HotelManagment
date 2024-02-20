@@ -306,8 +306,8 @@ public class ForgotPass extends javax.swing.JFrame {
 
     Connection conn = null;
     Statement st = null;
-    ResultSet rs = null,rs2=null;
-    PreparedStatement pstmt = null,ps=null;
+    ResultSet rs = null, rs2 = null;
+    PreparedStatement pstmt = null, ps = null;
 
     String email = null;
 
@@ -364,6 +364,7 @@ public class ForgotPass extends javax.swing.JFrame {
 
     private void btnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch1ActionPerformed
 
+        int check = 0;
         String question = txtQ.getText();
         String answer = txtAnswer.getText();
         String newPass = txtPass.getText();
@@ -386,21 +387,31 @@ public class ForgotPass extends javax.swing.JFrame {
 
                 if (rs.next()) {
 
-                    String qry2 = "update user set password='"+txtPass.getText()+"' where email=? ";
-                    ps = conn.prepareStatement(qry);
-                    //pstmt.setString(1, newPass);
-                    ps.setString(1, email);
-
-                    ResultSet rs2 = pstmt.executeQuery();
-                    
-                    if (rs2.next()) {
-                        JOptionPane.showMessageDialog(null, "Password Updated Succussfully");
-                        setVisible(false);
-                        new ForgotPass().setVisible(true);
-                    }
+                    check = 1;
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Incorrect Answer");
+                }
+
+                if (check == 1) {
+                    try {
+                        String qry2 = "update user set password=? where email=?";
+                        ps = conn.prepareStatement(qry2);
+                        ps.setString(1, newPass);
+                        ps.setString(2, email);
+
+                        int rowsAffected = ps.executeUpdate();
+
+                        if (rowsAffected > 0) {
+                            JOptionPane.showMessageDialog(null, "Password Updated Successfully");
+                            setVisible(false);
+                            new ForgotPass().setVisible(true);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Password Update Failed");
+                        }
+                    } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(null, "Something Went Wrong: " + e.getMessage());
+                    }
                 }
 
             } catch (ClassNotFoundException | SQLException e) {
