@@ -363,12 +363,31 @@ public class AdminHome extends javax.swing.JFrame {
             status="true";
         }
         try {
-            int a = JOptionPane.showConfirmDialog(null, "Do you want to change status.", "Select", JOptionPane.YES_NO_OPTION);
+            int a = JOptionPane.showConfirmDialog(null, "Do you want to change status of "+email+"", "Select", JOptionPane.YES_NO_OPTION);
 
             if (a == 0) {
-                this.dispose();
-                new Login().setVisible(true);
-        }
+                
+                try {
+                        String qry2 = "update user set status=? where email=?";
+                        ps = conn.prepareStatement(qry2);
+                        ps.setString(1, status);
+                        ps.setString(2, email);
+
+                        int rowsAffected = ps.executeUpdate();
+
+                        if (rowsAffected > 0) {
+                            JOptionPane.showMessageDialog(null, "Status Updated Successfully");
+                            setVisible(false);
+                            new AdminHome().setVisible(true);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Status Update Failed");
+                        }
+                    } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(null, "Something Went Wrong: " + e.getMessage());
+                    }
+            }
+            
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
