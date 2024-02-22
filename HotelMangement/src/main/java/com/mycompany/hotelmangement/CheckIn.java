@@ -524,17 +524,28 @@ public class CheckIn extends javax.swing.JFrame {
                     
                     qry="insert into customer(id,name,mobile,nationality,gender,email,idproof,adress,checkin,roomno,bed,roomtype,pperday) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
                     PreparedStatement ps1 = conn.prepareStatement(qry);
-                    ps1.setString(1, roomNo);
-                    ps1.setString(1, roomNo);
+                    ps1.setInt(1, id);
+                    ps1.setString(2, name);
+                    ps1.setString(3, phone);
+                    ps1.setString(4, nationality);
+                    ps1.setString(5, gender);
+                    ps1.setString(6, email);
+                    ps1.setString(7, proof);
+                    ps1.setString(8, address);
+                    ps1.setString(9, checkin);
+                    ps1.setString(10, roomno);
+                    ps1.setString(11, bed);
+                    ps1.setString(12, roomType);
+                    ps1.setString(13, price);
+                    
                     ps1.executeUpdate();
-                    
-                    
+  
+                    ps1.close();
                 }
                 
                 
                 
                 ps.close();
-                ps1.close();
                 conn.close();
             } catch (ClassNotFoundException | SQLException e) {
                 JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
