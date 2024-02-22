@@ -4,7 +4,11 @@
  */
 package com.mycompany.hotelmangement;
 
+import com.mysql.cj.protocol.Resultset;
 import javax.swing.JOptionPane;
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
+import project.*;
 
 /**
  *
@@ -18,10 +22,24 @@ public class Checkout extends javax.swing.JFrame {
     public Checkout() {
         initComponents();
         
-        txt
+        txtPrice.setEditable(false);
+        txtDatein.setEditable(false);
+        txtDateout.setEditable(false);
+        txtPhone.setEditable(false);
+        txtDays.setEditable(false);
+        txtTotal.setEditable(false);
+        txtEmail.setEditable(false);
+        txtName.setEditable(false);
         
         
     }
+    
+    
+    int id=0;
+    String qry=null;
+    String roomtype;
+    String bed;
+    String roomNo;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,7 +58,7 @@ public class Checkout extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblCus = new javax.swing.JTable();
         txtName = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         txtDatein = new javax.swing.JTextField();
@@ -49,7 +67,7 @@ public class Checkout extends javax.swing.JFrame {
         txtDateout = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
-        txtPday = new javax.swing.JTextField();
+        txtPrice = new javax.swing.JTextField();
         txtDays = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -63,6 +81,11 @@ public class Checkout extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(51, 102, 0));
 
@@ -124,10 +147,10 @@ public class Checkout extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setBackground(new java.awt.Color(255, 255, 255));
-        jTable1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(0, 51, 153));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblCus.setBackground(new java.awt.Color(255, 255, 255));
+        tblCus.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        tblCus.setForeground(new java.awt.Color(0, 51, 153));
+        tblCus.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -135,9 +158,9 @@ public class Checkout extends javax.swing.JFrame {
                 "ID", "Name", "Mobile", "Nationality", "Gender", "Email", "Proof", "Address", "Checkin Date", "Room No", "Bed", "Room Type", "price per day"
             }
         ));
-        jTable1.setRowHeight(30);
-        jTable1.setRowMargin(3);
-        jScrollPane1.setViewportView(jTable1);
+        tblCus.setRowHeight(30);
+        tblCus.setRowMargin(3);
+        jScrollPane1.setViewportView(tblCus);
 
         txtName.setBackground(new java.awt.Color(255, 255, 255));
         txtName.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -171,9 +194,9 @@ public class Checkout extends javax.swing.JFrame {
         txtPhone.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         txtPhone.setForeground(new java.awt.Color(0, 51, 102));
 
-        txtPday.setBackground(new java.awt.Color(255, 255, 255));
-        txtPday.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        txtPday.setForeground(new java.awt.Color(0, 51, 102));
+        txtPrice.setBackground(new java.awt.Color(255, 255, 255));
+        txtPrice.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtPrice.setForeground(new java.awt.Color(0, 51, 102));
 
         txtDays.setBackground(new java.awt.Color(255, 255, 255));
         txtDays.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -267,7 +290,7 @@ public class Checkout extends javax.swing.JFrame {
                             .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPday, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(67, 67, 67)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -329,7 +352,7 @@ public class Checkout extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtPday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -392,6 +415,51 @@ public class Checkout extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnClearActionPerformed
 
+    
+    Connection conn = null;
+    Statement st = null;
+    ResultSet rs = null;
+    PreparedStatement ps = null;
+    
+    
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        
+         try {
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotelmanage", "root", "12345678");
+
+            String qry = "SELECT * FROM customer where  checkout is null";
+            ps = conn.prepareStatement(qry);
+
+            rs = ps.executeQuery();
+            
+            
+
+            DefaultTableModel model = (DefaultTableModel) tblCus.getModel();
+            model.setRowCount(0);
+            try {
+                
+                while (rs.next()) {
+                    model.addRow(new Object[]{rs.getString(1), rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13)   });
+                }
+                
+                rs.close();
+                
+            } catch (Exception e) {
+                
+                e.printStackTrace();
+            }
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, "");
+        }
+        
+        
+        
+    }//GEN-LAST:event_formComponentShown
+
     /**
      * @param args the command line arguments
      */
@@ -446,14 +514,14 @@ public class Checkout extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblCus;
     private javax.swing.JTextField txtDatein;
     private javax.swing.JTextField txtDateout;
     private javax.swing.JTextField txtDays;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtPday;
     private javax.swing.JTextField txtPhone;
+    private javax.swing.JTextField txtPrice;
     private javax.swing.JTextField txtRno;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
