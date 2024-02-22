@@ -489,69 +489,69 @@ public class CheckIn extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
         }
-        count+=1;
+        count += 1;
     }
-    
+
 
     private void btnAllocateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllocateActionPerformed
         getCount();
-        int id =count;
-        String name=txtName.getText();
-        String phone=txtMobile.getText();
-        String nationality=txtNationality.getText();
-        String email=txtEmail.getText();
-        String gender=(String)txtGen.getSelectedItem();
-        String proof=txtProof.getText();
-        String address=txtAdd.getText();
-        String checkin=txtDate.getText();
-        String bed=(String)txtBed.getSelectedItem();
-        String roomType=(String)txtRoom.getSelectedItem();
-        String roomno=(String)txtRno.getSelectedItem();
-        String price=txtPrice.getText();
-        
-        String qry="";
-        
+        int id = count;
+        String name = txtName.getText();
+        String phone = txtMobile.getText();
+        String nationality = txtNationality.getText();
+        String email = txtEmail.getText();
+        String gender = (String) txtGen.getSelectedItem();
+        String proof = txtProof.getText();
+        String address = txtAdd.getText();
+        String checkin = txtDate.getText();
+        String bed = (String) txtBed.getSelectedItem();
+        String roomType = (String) txtRoom.getSelectedItem();
+        String roomNo = (String) txtRno.getSelectedItem(); // corrected variable name
+        String price = txtPrice.getText();
+
+        String qry = "";
+
         try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotelmanage", "root", "12345678");
-                
-                
-                if(price.equals("")){
-                    qry="update room set status='Booked' where rno=?";
-                    PreparedStatement ps = conn.prepareStatement(qry);
-                    ps.setString(1, roomNo);
-                    ps.executeUpdate();
-                    
-                    qry="insert into customer(id,name,mobile,nationality,gender,email,idproof,adress,checkin,roomno,bed,roomtype,pperday) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-                    PreparedStatement ps1 = conn.prepareStatement(qry);
-                    ps1.setInt(1, id);
-                    ps1.setString(2, name);
-                    ps1.setString(3, phone);
-                    ps1.setString(4, nationality);
-                    ps1.setString(5, gender);
-                    ps1.setString(6, email);
-                    ps1.setString(7, proof);
-                    ps1.setString(8, address);
-                    ps1.setString(9, checkin);
-                    ps1.setString(10, roomno);
-                    ps1.setString(11, bed);
-                    ps1.setString(12, roomType);
-                    ps1.setString(13, price);
-                    
-                    ps1.executeUpdate();
-  
-                    ps1.close();
-                }
-                
-                
-                
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotelmanage", "root", "12345678");
+
+            if (!price.equals("")) {
+                // Update room status to 'Booked'
+                qry = "UPDATE room SET status = 'Booked' WHERE rno = ?";
+                PreparedStatement ps = conn.prepareStatement(qry);
+                ps.setString(1, roomNo); // Use roomNo instead of roomno
+                ps.executeUpdate();
                 ps.close();
-                conn.close();
-            } catch (ClassNotFoundException | SQLException e) {
-                JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
-                e.printStackTrace();
+
+                // Insert customer data
+                qry = "INSERT INTO customer(id, name, mobile, nationality, gender, email, idproof, address, checkin, roomno, bed, roomtype, pperday) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement ps1 = conn.prepareStatement(qry);
+                ps1.setInt(1, id);
+                ps1.setString(2, name);
+                ps1.setString(3, phone);
+                ps1.setString(4, nationality);
+                ps1.setString(5, gender);
+                ps1.setString(6, email);
+                ps1.setString(7, proof);
+                ps1.setString(8, address);
+                ps1.setString(9, checkin);
+                ps1.setString(10, roomNo);
+                ps1.setString(11, bed);
+                ps1.setString(12, roomType);
+                ps1.setString(13, price);
+                ps1.executeUpdate();
+                ps1.close();
+
+                JOptionPane.showMessageDialog(null, "Customer Check-in Successful.");
+                setVisible(false);
+                new CheckIn().setVisible(true);
             }
-        
+
+            conn.close();
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnAllocateActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
