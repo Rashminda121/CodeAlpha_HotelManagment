@@ -20,3 +20,24 @@ CREATE TABLE `hotelmanage`.`room` (
   `bed` VARCHAR(100) NULL,
   `price` INT NULL,
   `status` VARCHAR(20) NULL);
+
+table customer
+
+CREATE TABLE `hotelmanage`.`customer` (
+  `id` INT NOT NULL,
+  `name` VARCHAR(200) NULL,
+  `mobile` VARCHAR(45) NULL,
+  `nationality` VARCHAR(45) NULL,
+  `customercol` VARCHAR(45) NULL,
+  `gender` VARCHAR(50) NULL,
+  `email` VARCHAR(200) NULL,
+  `idproof` VARCHAR(100) NULL,
+  `address` VARCHAR(250) NULL,
+  `checkin` VARCHAR(45) NULL,
+  `roomno` VARCHAR(45) NULL,
+  `bed` VARCHAR(45) NULL,
+  `roomtype` VARCHAR(45) NULL,
+  `pperday` INT NULL,
+  `nodays` INT NULL,
+  `total` VARCHAR(200) NULL,
+  `checkout` VARCHAR(100) NULL);
