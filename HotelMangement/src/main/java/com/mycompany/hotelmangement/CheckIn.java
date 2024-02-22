@@ -109,9 +109,9 @@ public class CheckIn extends javax.swing.JFrame {
         txtGen = new javax.swing.JComboBox<>();
         txtEmail = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        txtPrice3 = new javax.swing.JTextField();
+        txtProof = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        txtPrice4 = new javax.swing.JTextField();
+        txtAdd = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -192,7 +192,7 @@ public class CheckIn extends javax.swing.JFrame {
         txtBed.setBackground(new java.awt.Color(255, 255, 255));
         txtBed.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         txtBed.setForeground(new java.awt.Color(0, 51, 153));
-        txtBed.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---Select---", "Single", "Double", "Thriple" }));
+        txtBed.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---select---", "Single", "Double", "Thriple" }));
         txtBed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBedActionPerformed(evt);
@@ -269,17 +269,17 @@ public class CheckIn extends javax.swing.JFrame {
         jLabel19.setForeground(new java.awt.Color(0, 51, 102));
         jLabel19.setText("Email:");
 
-        txtPrice3.setBackground(new java.awt.Color(255, 255, 255));
-        txtPrice3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        txtPrice3.setForeground(new java.awt.Color(0, 51, 102));
+        txtProof.setBackground(new java.awt.Color(255, 255, 255));
+        txtProof.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtProof.setForeground(new java.awt.Color(0, 51, 102));
 
         jLabel20.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(0, 51, 102));
         jLabel20.setText("ID Proof:");
 
-        txtPrice4.setBackground(new java.awt.Color(255, 255, 255));
-        txtPrice4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        txtPrice4.setForeground(new java.awt.Color(0, 51, 102));
+        txtAdd.setBackground(new java.awt.Color(255, 255, 255));
+        txtAdd.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtAdd.setForeground(new java.awt.Color(0, 51, 102));
 
         jLabel21.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(0, 51, 102));
@@ -339,9 +339,9 @@ public class CheckIn extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtPrice3)
+                                .addComponent(txtProof)
                                 .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtPrice4, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -392,16 +392,15 @@ public class CheckIn extends javax.swing.JFrame {
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPrice3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtProof, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(15, 15, 15)
                                 .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPrice4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(11, 11, 11)
                                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(1, 1, 1))
+                                .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -457,10 +456,61 @@ public class CheckIn extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    int count = 0; // Assuming this is declared as an instance variable of the class
+
+    private void getCount() {
+        String qry = "SELECT max(id) FROM customer";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotelmanage", "root", "12345678");
+            st = conn.createStatement();
+            rs = st.executeQuery(qry);
+
+            if (rs.next()) {
+                count = rs.getInt(1); // Assuming the result of max(tid) is an integer
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error: Unable to connect to database \n" + ex);
+        } finally {
+            // Close resources like ResultSet, Statement, and Connection
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (st != null) {
+                    st.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        count+=1;
+    }
+    
 
     private void btnAllocateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllocateActionPerformed
-
-
+        getCount();
+        int id =count;
+        String name=txtName.getText();
+        String phone=txtMobile.getText();
+        String nationality=txtNationality.getText();
+        String email=txtEmail.getText();
+        String gender=(String)txtGen.getSelectedItem();
+        String proof=txtProof.getText();
+        String address=txtAdd.getText();
+        String checkin=txtDate.getText();
+        String bed=(String)txtBed.getSelectedItem();
+        String roomType=(String)txtRoom.getSelectedItem();
+        String roomno=(String)txtRno.getSelectedItem();
+        String price=txtPrice.getText();
+        
+        
+        
     }//GEN-LAST:event_btnAllocateActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
@@ -577,6 +627,7 @@ public class CheckIn extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JTextField txtAdd;
     private javax.swing.JComboBox<String> txtBed;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtEmail;
@@ -585,8 +636,7 @@ public class CheckIn extends javax.swing.JFrame {
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtNationality;
     private javax.swing.JTextField txtPrice;
-    private javax.swing.JTextField txtPrice3;
-    private javax.swing.JTextField txtPrice4;
+    private javax.swing.JTextField txtProof;
     private javax.swing.JComboBox<String> txtRno;
     private javax.swing.JComboBox<String> txtRoom;
     // End of variables declaration//GEN-END:variables

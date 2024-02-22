@@ -144,10 +144,10 @@
                           <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtPrice3" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtProof" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jLabel20" alignment="1" min="-2" pref="194" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="txtPrice4" min="-2" pref="194" max="-2" attributes="0"/>
+                              <Component id="txtAdd" min="-2" pref="194" max="-2" attributes="0"/>
                               <Component id="jLabel22" alignment="0" min="-2" pref="194" max="-2" attributes="0"/>
                               <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jLabel21" max="32767" attributes="0"/>
@@ -212,18 +212,17 @@
                               <Group type="102" attributes="0">
                                   <Component id="jLabel20" min="-2" pref="29" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtPrice3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtProof" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                                   <Component id="jLabel22" min="-2" pref="29" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtPrice4" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtAdd" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                                   <Component id="jLabel24" min="-2" pref="29" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="txtPrice" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
@@ -345,7 +344,7 @@
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
-                <StringItem index="0" value="---Select---"/>
+                <StringItem index="0" value="---select---"/>
                 <StringItem index="1" value="Single"/>
                 <StringItem index="2" value="Double"/>
                 <StringItem index="3" value="Thriple"/>
@@ -533,7 +532,7 @@
             <Property name="text" type="java.lang.String" value="Email:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPrice3">
+        <Component class="javax.swing.JTextField" name="txtProof">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -557,7 +556,7 @@
             <Property name="text" type="java.lang.String" value="ID Proof:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPrice4">
+        <Component class="javax.swing.JTextField" name="txtAdd">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
