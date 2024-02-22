@@ -525,7 +525,7 @@ public class CheckIn extends javax.swing.JFrame {
                     qry="insert into customer(id,name,mobile,nationality,gender,email,idproof,adress,checkin,roomno,bed,roomtype,pperday) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
                     PreparedStatement ps1 = conn.prepareStatement(qry);
                     ps1.setString(1, roomNo);
-                    
+                    ps1.setString(1, roomNo);
                     ps1.executeUpdate();
                     
                     
