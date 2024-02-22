@@ -509,7 +509,37 @@ public class CheckIn extends javax.swing.JFrame {
         String roomno=(String)txtRno.getSelectedItem();
         String price=txtPrice.getText();
         
+        String qry="";
         
+        try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotelmanage", "root", "12345678");
+                
+                
+                if(price.equals("")){
+                    qry="update room set status='Booked' where rno=?";
+                    PreparedStatement ps = conn.prepareStatement(qry);
+                    ps.setString(1, roomNo);
+                    ps.executeUpdate();
+                    
+                    qry="insert into customer(id,name,mobile,nationality,gender,email,idproof,adress,checkin,roomno,bed,roomtype,pperday) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    PreparedStatement ps1 = conn.prepareStatement(qry);
+                    ps1.setString(1, roomNo);
+                    
+                    ps1.executeUpdate();
+                    
+                    
+                }
+                
+                
+                
+                ps.close();
+                ps1.close();
+                conn.close();
+            } catch (ClassNotFoundException | SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+                e.printStackTrace();
+            }
         
     }//GEN-LAST:event_btnAllocateActionPerformed
 
