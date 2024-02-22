@@ -14,7 +14,9 @@ import java.util.Calendar;
 import java.util.Date;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
 import java.io.FileOutputStream;
 
 
@@ -466,11 +468,12 @@ public class Checkout extends javax.swing.JFrame {
         String name=txtName.getText();
         String mobile=txtPhone.getText();
         String email=txtEmail.getText();
-        
+        String checkin=txtDatein.getText();
         String checkout=txtDateout.getText();
         String nodays=txtDays.getText();
         String total=txtTotal.getText();
         roomNo =txtRno.getText();
+        String price=txtPrice.getText();
         
         String qry = "";
 
@@ -502,10 +505,45 @@ public class Checkout extends javax.swing.JFrame {
                 doc.add(paragraph);
                 Paragraph p2=new Paragraph("****************************************************************");
                 doc.add(p2);
+                p2=new Paragraph("\tBill ID: "+id+"\nCustomer Details:\nName: "+name+"\nMobile No: "+mobile+"\nEmail: "+email+"\n");
+                doc.add(p2);
+                p2=new Paragraph("****************************************************************");
+                doc.add(p2);
+                p2=new Paragraph("\tRoom Details:\nCNumber:"+roomNo+"\nType: "+roomtype+"\nBed: "+bed+"\nPrice for day: "+price+"");
+                doc.add(p2);
+                p2=new Paragraph("****************************************************************");
+                doc.add(p2);
+                PdfPTable tbl1=new PdfPTable(4);
+                tbl1.addCell("Check In Date:"+checkin);
+                tbl1.addCell("Check Out Date:"+checkout);
+                tbl1.addCell("No of Days:"+nodays);
+                tbl1.addCell("Total Amount:"+total);
+                doc.add(tbl1);p2=new Paragraph("****************************************************************");
+                doc.add(p2);
+                doc.add(tbl1);p2=new Paragraph("Thank You, Please Visit Again! ");
+                doc.add(p2);
+                
                 
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            doc.close();
+            int a=JOptionPane.showConfirmDialog(null, "Do You want to Print Bill","Select",JOptionPane.YES_NO_OPTION);
+            if(a==0){
+                try {
+                    
+                    if(new File("D:\\"+id+".pdf").exists()){
+                        Process p=Runtime.getRuntime().exec("rundl132 url.dll,FileProtocolHandler D:\\"+id+".pdf");
+                    }else{
+                        System.out.println("File is not exists.");
+                    }
+                    
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            setVisible(false);
+            new Checkout().setVisible(true);
             
         } catch (ClassNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
