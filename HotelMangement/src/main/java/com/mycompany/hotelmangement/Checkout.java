@@ -9,6 +9,14 @@ import javax.swing.JOptionPane;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 import project.*;
+import java.text.*;
+import java.util.Calendar;
+import java.util.Date;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileOutputStream;
+
 
 /**
  *
@@ -21,7 +29,7 @@ public class Checkout extends javax.swing.JFrame {
      */
     public Checkout() {
         initComponents();
-        
+
         txtPrice.setEditable(false);
         txtDatein.setEditable(false);
         txtDateout.setEditable(false);
@@ -30,13 +38,11 @@ public class Checkout extends javax.swing.JFrame {
         txtTotal.setEditable(false);
         txtEmail.setEditable(false);
         txtName.setEditable(false);
-        
-        
+
     }
-    
-    
-    int id=0;
-    String qry=null;
+
+    int id = 0;
+    String qry = null;
     String roomtype;
     String bed;
     String roomNo;
@@ -404,27 +410,125 @@ public class Checkout extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-       
+        String roomno = txtRno.getText();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotelmanage", "root", "12345678");
+
+            String qry = "SELECT * FROM customer where  roomno='" + roomno + "' and checkout is NULL";
+            ps = conn.prepareStatement(qry);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                //txtRno.setEditable(false);
+                id = rs.getInt(1);
+                txtName.setText(rs.getString(2));
+                txtDatein.setText(rs.getString(9));
+                txtPhone.setText(rs.getString(3));
+                txtPrice.setText(rs.getString(13));
+
+                SimpleDateFormat myformat = new SimpleDateFormat("yyyy-MM-dd");
+                Calendar cal = Calendar.getInstance();
+                txtDateout.setText(myformat.format(cal.getTime()));
+
+                String datebefore = rs.getString(9);
+                java.util.Date dateb = myformat.parse(datebefore);
+                String dateafter = myformat.format(cal.getTime());
+                java.util.Date dateAfter = myformat.parse(dateafter);
+                long diffrence = dateAfter.getTime() - dateb.getTime();
+                int nodays = (int) (diffrence / (1000 * 60 * 60 * 24));
+                if (nodays == 0) {
+                    nodays = 1;
+                    txtDays.setText(String.valueOf(nodays));
+                    float price = Float.parseFloat(txtPrice.getText());
+
+                    txtTotal.setText(String.valueOf(nodays * price));
+                }
+                txtEmail.setText(rs.getString(6));
+                roomtype = rs.getNString(12);
+                bed = rs.getNString(11);
+            } else {
+
+                JOptionPane.showMessageDialog(null, "Room Number is not Booked or Does not Exist");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        
+        
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnCheckoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckoutActionPerformed
-        // TODO add your handling code here:
+        
+        String name=txtName.getText();
+        String mobile=txtPhone.getText();
+        String email=txtEmail.getText();
+        
+        String checkout=txtDateout.getText();
+        String nodays=txtDays.getText();
+        String total=txtTotal.getText();
+        roomNo =txtRno.getText();
+        
+        String qry = "";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotelmanage", "root", "12345678");
+
+            
+            // Update room status to 'Booked'
+            qry = "UPDATE customer SET nodays = '"+nodays+"', total='"+total+"', checkout='"+checkout+"' where id='"+id+"' ";
+            PreparedStatement ps = conn.prepareStatement(qry);
+            ps.executeUpdate();
+            ps.close();
+            
+            qry = "UPDATE room SET status = 'Not Booked' where rno='"+roomNo+"' ";
+            PreparedStatement ps1 = conn.prepareStatement(qry);
+            ps1.executeUpdate();
+            ps1.close();
+                
+            conn.close();
+            
+            String path="D:\\";
+            com.itextpdf.text.Document doc=new com.itextpdf.text.Document();
+            
+            try {
+                PdfWriter.getInstance(doc, new FileOutputStream(path+""+id+".pdf"));
+                doc.open();
+                Paragraph paragraph=new Paragraph("--------------- Hotel Managment System ---------");
+                doc.add(paragraph);
+                Paragraph p2=new Paragraph("****************************************************************");
+                doc.add(p2);
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        
     }//GEN-LAST:event_btnCheckoutActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        // TODO add your handling code here:
+        setVisible(false);
+        new Checkout().setVisible(true);
     }//GEN-LAST:event_btnClearActionPerformed
 
-    
     Connection conn = null;
     Statement st = null;
     ResultSet rs = null;
     PreparedStatement ps = null;
-    
-    
+
+
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        
-         try {
+
+        try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotelmanage", "root", "12345678");
@@ -433,21 +537,19 @@ public class Checkout extends javax.swing.JFrame {
             ps = conn.prepareStatement(qry);
 
             rs = ps.executeQuery();
-            
-            
 
             DefaultTableModel model = (DefaultTableModel) tblCus.getModel();
             model.setRowCount(0);
             try {
-                
+
                 while (rs.next()) {
-                    model.addRow(new Object[]{rs.getString(1), rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13)   });
+                    model.addRow(new Object[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13)});
                 }
-                
+
                 rs.close();
-                
+
             } catch (Exception e) {
-                
+
                 e.printStackTrace();
             }
 
@@ -455,9 +557,8 @@ public class Checkout extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "");
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_formComponentShown
 
     /**
