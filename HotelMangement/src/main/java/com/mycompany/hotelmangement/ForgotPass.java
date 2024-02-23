@@ -146,6 +146,11 @@ public class ForgotPass extends javax.swing.JFrame {
         btnSearch2.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         btnSearch2.setForeground(new java.awt.Color(255, 255, 255));
         btnSearch2.setText("Clear");
+        btnSearch2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearch2ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 102, 0));
@@ -433,6 +438,11 @@ public class ForgotPass extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnSearch1ActionPerformed
+
+    private void btnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch2ActionPerformed
+        setVisible(false);
+        new ForgotPass().setVisible(true);
+    }//GEN-LAST:event_btnSearch2ActionPerformed
 
     /**
      * @param args the command line arguments
