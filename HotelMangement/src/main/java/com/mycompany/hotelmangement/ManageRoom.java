@@ -52,6 +52,12 @@ public class ManageRoom extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         btnLogout = new javax.swing.JButton();
         btnLogout1 = new javax.swing.JButton();
+        txtSerach = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
+        btnSearch1 = new javax.swing.JButton();
+        btnSearch2 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        btnSearch3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -110,7 +116,7 @@ public class ManageRoom extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Roon No", "Room Type", "Bed Type", "Price", "Status"
+                "Room No", "Room Type", "Bed Type", "Price", "Status"
             }
         ));
         tblRoom.setRowHeight(30);
@@ -184,30 +190,94 @@ public class ManageRoom extends javax.swing.JFrame {
             }
         });
 
+        txtSerach.setBackground(new java.awt.Color(255, 255, 255));
+        txtSerach.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtSerach.setForeground(new java.awt.Color(0, 51, 102));
+
+        btnSearch.setBackground(new java.awt.Color(255, 255, 255));
+        btnSearch.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        btnSearch.setForeground(new java.awt.Color(51, 102, 0));
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        btnSearch1.setBackground(new java.awt.Color(51, 102, 0));
+        btnSearch1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        btnSearch1.setForeground(new java.awt.Color(255, 255, 255));
+        btnSearch1.setText("Update");
+        btnSearch1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearch1ActionPerformed(evt);
+            }
+        });
+
+        btnSearch2.setBackground(new java.awt.Color(255, 0, 51));
+        btnSearch2.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        btnSearch2.setForeground(new java.awt.Color(255, 255, 255));
+        btnSearch2.setText("Delete");
+        btnSearch2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearch2ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 51, 102));
+        jLabel8.setText("Serach By Room Number for Changes.");
+
+        btnSearch3.setBackground(new java.awt.Color(255, 255, 255));
+        btnSearch3.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        btnSearch3.setForeground(new java.awt.Color(51, 102, 0));
+        btnSearch3.setText("Refresh");
+        btnSearch3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearch3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtPrice)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtRno, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtRtype, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtBtype, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnLogout)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnLogout1)))
-                .addGap(136, 136, 136))
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnSearch3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtPrice)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtRno, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtRtype, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtBtype, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnLogout)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnLogout1)))
+                        .addGap(136, 136, 136))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtSerach, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,7 +307,17 @@ public class ManageRoom extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGap(8, 8, 8)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSerach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch)
+                    .addComponent(btnSearch1)
+                    .addComponent(btnSearch2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(btnSearch3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -355,6 +435,108 @@ public class ManageRoom extends javax.swing.JFrame {
         
     }//GEN-LAST:event_formComponentShown
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        String roomno = txtSerach.getText();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotelmanage", "root", "12345678");
+
+            String qry = "SELECT * FROM room where  rno='" + roomno + "' ";
+            ps = conn.prepareStatement(qry);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                
+                txtRno.setEditable(false);
+                txtRtype.setEnabled(false);
+                txtBtype.setEnabled(false);
+                btnLogout.setEnabled(false);
+                
+                txtRno.setText(rs.getString(1));
+                txtRtype.setSelectedItem(rs.getString(2));
+                txtBtype.setSelectedItem(rs.getString(3));
+                txtPrice.setText(rs.getString(4));
+
+                
+                
+            } else {
+
+                JOptionPane.showMessageDialog(null, "Invalid Serach");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch2ActionPerformed
+        String rno = txtRno.getText();
+        String search=txtSerach.getText();
+        
+        if(!rno.equals(null )&& search != null){
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotelmanage", "root", "12345678");
+
+                String qry = "delete from room where  rno='" + rno + "' ";
+                ps = conn.prepareStatement(qry);
+
+                ps.executeUpdate();
+                
+                    
+                JOptionPane.showMessageDialog(null, "Deleted Successfully");
+
+                ps.close();
+                setVisible(false);
+                new ManageRoom().setVisible(true);
+                
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        
+        }
+
+    }//GEN-LAST:event_btnSearch2ActionPerformed
+
+    private void btnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch1ActionPerformed
+        String rno = txtRno.getText();
+        int price=Integer.valueOf(txtPrice.getText());
+        String search=txtSerach.getText();
+        if(price != 0 && search != null){
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotelmanage", "root", "12345678");
+
+                String qry = "update room set price='"+price+"' where  rno='" + rno + "' ";
+                ps = conn.prepareStatement(qry);
+
+                ps.executeUpdate();
+                
+                    
+                JOptionPane.showMessageDialog(null, "Updated Successfully");
+
+                ps.close();
+                setVisible(false);
+                new ManageRoom().setVisible(true);
+                
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        
+        }
+
+        
+    }//GEN-LAST:event_btnSearch1ActionPerformed
+
+    private void btnSearch3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch3ActionPerformed
+            
+        setVisible(false);
+        new ManageRoom().setVisible(true);
+        
+    }//GEN-LAST:event_btnSearch3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -393,20 +575,29 @@ public class ManageRoom extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnLogout1;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnSearch1;
+    private javax.swing.JButton btnSearch2;
+    private javax.swing.JButton btnSearch3;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblRoom;
     private javax.swing.JComboBox<String> txtBtype;
     private javax.swing.JTextField txtPrice;
     private javax.swing.JTextField txtRno;
     private javax.swing.JComboBox<String> txtRtype;
+    private javax.swing.JTextField txtSerach;
     // End of variables declaration//GEN-END:variables
 }
