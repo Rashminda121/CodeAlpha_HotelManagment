@@ -127,6 +127,11 @@ public class Login extends javax.swing.JFrame {
         txtSignup.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtSignup.setForeground(new java.awt.Color(51, 102, 0));
         txtSignup.setText("Don't Have an Account? Signup");
+        txtSignup.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtSignupMouseClicked(evt);
+            }
+        });
 
         jPanel5.setBackground(new java.awt.Color(51, 102, 0));
 
@@ -313,6 +318,11 @@ public class Login extends javax.swing.JFrame {
         this.dispose();
         new ForgotPass().setVisible(true);
     }//GEN-LAST:event_txtSignup1MouseClicked
+
+    private void txtSignupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSignupMouseClicked
+        setVisible(false);
+        new SignUp().setVisible(true);
+    }//GEN-LAST:event_txtSignupMouseClicked
 
     /**
      * @param args the command line arguments

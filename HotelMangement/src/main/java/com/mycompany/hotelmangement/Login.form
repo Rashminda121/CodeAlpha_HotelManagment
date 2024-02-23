@@ -271,6 +271,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Don&apos;t Have an Account? Signup"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtSignupMouseClicked"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel5">
           <Properties>
