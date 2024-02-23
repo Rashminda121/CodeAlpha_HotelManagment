@@ -441,14 +441,15 @@ public class Checkout extends javax.swing.JFrame {
                 String dateafter = myformat.format(cal.getTime());
                 java.util.Date dateAfter = myformat.parse(dateafter);
                 long diffrence = dateAfter.getTime() - dateb.getTime();
+                
                 int nodays = (int) (diffrence / (1000 * 60 * 60 * 24));
                 if (nodays == 0) {
                     nodays = 1;
-                    txtDays.setText(String.valueOf(nodays));
-                    float price = Float.parseFloat(txtPrice.getText());
-
-                    txtTotal.setText(String.valueOf(nodays * price));
                 }
+                txtDays.setText(String.valueOf(nodays));
+                float price = Float.parseFloat(txtPrice.getText());
+
+                txtTotal.setText(String.valueOf(nodays * price));
                 txtEmail.setText(rs.getString(6));
                 roomtype = rs.getNString(12);
                 bed = rs.getNString(11);
@@ -470,7 +471,7 @@ public class Checkout extends javax.swing.JFrame {
         String email=txtEmail.getText();
         String checkin=txtDatein.getText();
         String checkout=txtDateout.getText();
-        String nodays=txtDays.getText();
+        int nodays=Integer.valueOf(txtDays.getText());
         String total=txtTotal.getText();
         roomNo =txtRno.getText();
         String price=txtPrice.getText();
@@ -513,15 +514,18 @@ public class Checkout extends javax.swing.JFrame {
                 doc.add(p2);
                 p2=new Paragraph("****************************************************************");
                 doc.add(p2);
+                
                 PdfPTable tbl1=new PdfPTable(4);
                 tbl1.addCell("Check In Date:"+checkin);
                 tbl1.addCell("Check Out Date:"+checkout);
                 tbl1.addCell("No of Days:"+nodays);
                 tbl1.addCell("Total Amount:"+total);
-                doc.add(tbl1);p2=new Paragraph("****************************************************************");
+                doc.add(tbl1);
+                
+                p2=new Paragraph("****************************************************************");
                 doc.add(p2);
-                doc.add(tbl1);p2=new Paragraph("Thank You, Please Visit Again! ");
-                doc.add(p2);
+                Paragraph p3=new Paragraph("Thank You, Please Visit Again! ");
+                doc.add(p3);
                 
                 
             } catch (Exception e) {
