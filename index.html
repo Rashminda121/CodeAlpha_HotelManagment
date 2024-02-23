@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayPal Payment</title>
+    <style>
+        body {
+            background: rgb(2,0,36);
+            background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        #container{
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            /*background-color: #4CAF50;*/
+            padding: 30px;
+            padding-left: 70px;
+            padding-bottom: 60px;
+            margin: 30px;
+            
+        }
+        label.name{
+            font-size: x-large;
+            color: #28700b;
+            margin-bottom: 10px;
+            font-weight: 700;
+            
+        }
+        input.txtBox{
+            padding:5px;
+            width:200px;
+        }
+        .btnsub{
+            padding: 10px;
+            font-size: 15px;
+            color: #ffffff;
+            background: #35950f;
+            border-radius: 10px;
+        }
+
+        #paymentForm {
+            background-color: white; /* Form background color */
+            padding-top:10px;
+            padding-bottom:90px;
+            padding-left: 50px;
+            padding-right: 50px;
+            height:30vh;
+            border-radius: 10px;
+            justify-content: center;
+            align-items: center;
+            width:fit-content;
+        
+        }
+
+        #paymentMessage {
+            display: none;
+            text-align: center;
+            color: white;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1 style="align-items: center;color: rgb(255, 255, 255);">Hotel Managment System <br> Pay with Paypal</h1>
+        <form id="paymentForm">
+            <h2 style="color: #4CAF50;font-weight: 700;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">PayPal Payment Form</h2>
+            <label for="name" class="name">Name</label><br>
+            <input type="text" class="txtBox" id="name" name="name" required><br><br>
+
+            <label for="amount" class="name">Amount</label><br>
+            <input type="number" class="txtBox" id="amount" name="amount" min="0" required><br><br>
+            
+            <input type="submit" class="btnsub" value="Proceed to Payment"><br>
+        </form><br>
+        <div id="paymentMessage">
+            <p>Payment Complete!</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('paymentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            var name = document.getElementById('name').value;
+            var amount = document.getElementById('amount').value;
+            
+            // Replace 'YOUR_PAYPAL_CLIENT_ID' with your actual PayPal Client ID
+            var paypalClientId = 'ATjqmDzTskqQUDBlwPc0VFcXGR1P4k4jr_sJNGy0hlMioHk9uil8zQv1SPCQ_h2DNpJjNd2HL39E1pGe';
+            
+            // Construct PayPal payment URL
+            var paypalUrl = 'https://www.paypal.com/sdk/js?client-id=' + paypalClientId;
+            paypalUrl += '&currency=USD&intent=capture&commit=true&disable-funding=credit,card';
+            
+            // Load PayPal script dynamically
+            var paypalScript = document.createElement('script');
+            paypalScript.src = paypalUrl;
+            paypalScript.onload = function() {
+                // Render PayPal button
+                paypal.Buttons({
+                    createOrder: function(data, actions) {
+                        return actions.order.create({
+                            purchase_units: [{
+                                amount: {
+                                    value: amount
+                                }
+                            }]
+                        });
+                    },
+                    onApprove: function(data, actions) {
+                        return actions.order.capture().then(function(details) {
+                            document.getElementById('paymentForm').style.display = 'none';
+                            document.getElementById('paymentMessage').style.display = 'block';
+                        });
+                    }
+                }).render('#paymentForm');
+            };
+            
+            // Append PayPal script to body
+            document.body.appendChild(paypalScript);
+        });
+    </script>
+</body>
+</html>
