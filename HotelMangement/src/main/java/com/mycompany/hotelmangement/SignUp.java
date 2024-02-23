@@ -363,7 +363,7 @@ public class SignUp extends javax.swing.JFrame {
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
         this.dispose();
-        new ForgotPass().setVisible(true);
+        new Login().setVisible(true);
     }//GEN-LAST:event_jLabel9MouseClicked
 
     /**
