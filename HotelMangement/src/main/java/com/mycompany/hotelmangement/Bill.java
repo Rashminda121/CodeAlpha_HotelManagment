@@ -4,6 +4,19 @@
  */
 package com.mycompany.hotelmangement;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.sql.*;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 /**
  *
  * @author Rashminda
@@ -15,6 +28,9 @@ public class Bill extends javax.swing.JFrame {
      */
     public Bill() {
         initComponents();
+        SimpleDateFormat myFormat=new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal= Calendar.getInstance();
+        txtSearch.setText(myFormat.format(cal.getTime()));
     }
 
     /**
@@ -30,11 +46,21 @@ public class Bill extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        txtRno = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblCus = new javax.swing.JTable();
+        jLabel21 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(51, 102, 0));
 
@@ -59,7 +85,7 @@ public class Bill extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(275, 275, 275)
+                .addGap(419, 419, 419)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -71,16 +97,16 @@ public class Bill extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jButton1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                        .addGap(21, 21, 21)
                         .addComponent(jLabel1)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtRno.setBackground(new java.awt.Color(255, 255, 255));
-        txtRno.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        txtRno.setForeground(new java.awt.Color(0, 51, 102));
+        txtSearch.setBackground(new java.awt.Color(255, 255, 255));
+        txtSearch.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtSearch.setForeground(new java.awt.Color(0, 51, 102));
 
         btnSearch.setBackground(new java.awt.Color(255, 255, 255));
         btnSearch.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -92,25 +118,82 @@ public class Bill extends javax.swing.JFrame {
             }
         });
 
+        jLabel19.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(0, 51, 102));
+        jLabel19.setText("Search By Checkout Date:");
+
+        tblCus.setBackground(new java.awt.Color(255, 255, 255));
+        tblCus.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        tblCus.setForeground(new java.awt.Color(51, 102, 0));
+        tblCus.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Name", "MobileNo", "Nationality", "Gender", "Email", "Proof", "Address", "Checkin", "Room No", "Bed", "Room Type", "Day Price", "Stay", "Total", "Checkout"
+            }
+        ));
+        tblCus.setRowHeight(30);
+        tblCus.setRowMargin(3);
+        tblCus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCusMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblCus);
+
+        jLabel21.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(51, 102, 0));
+        jLabel21.setText("Click On Table Row To Open Bill");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(276, Short.MAX_VALUE)
-                .addComponent(txtRno, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(168, 168, 168))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(272, 272, 272))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(435, 435, 435))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(70, 70, 70)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch))
-                .addContainerGap(297, Short.MAX_VALUE))
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        jPanel4.setBackground(new java.awt.Color(51, 102, 0));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1196, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 44, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -119,13 +202,16 @@ public class Bill extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -141,57 +227,110 @@ public class Bill extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    Connection conn = null;
+    Statement st = null;
+    ResultSet rs = null;
+    PreparedStatement ps = null;
+    
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        String roomno = txtRno.getText();
+        String checkout = txtSearch.getText();
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotelmanage", "root", "12345678");
 
-            String qry = "SELECT * FROM customer where  roomno='" + roomno + "' and checkout is NULL";
+            String qry = "SELECT * FROM customer where  checkout='" + checkout + "' ";
             ps = conn.prepareStatement(qry);
 
             rs = ps.executeQuery();
+            
+            DefaultTableModel model = (DefaultTableModel) tblCus.getModel();
+            model.setRowCount(0);
+            try {
 
-            if (rs.next()) {
-
-                //txtRno.setEditable(false);
-                id = rs.getInt(1);
-                txtName.setText(rs.getString(2));
-                txtDatein.setText(rs.getString(9));
-                txtPhone.setText(rs.getString(3));
-                txtPrice.setText(rs.getString(13));
-
-                SimpleDateFormat myformat = new SimpleDateFormat("yyyy-MM-dd");
-                Calendar cal = Calendar.getInstance();
-                txtDateout.setText(myformat.format(cal.getTime()));
-
-                String datebefore = rs.getString(9);
-                java.util.Date dateb = myformat.parse(datebefore);
-                String dateafter = myformat.format(cal.getTime());
-                java.util.Date dateAfter = myformat.parse(dateafter);
-                long diffrence = dateAfter.getTime() - dateb.getTime();
-
-                int nodays = (int) (diffrence / (1000 * 60 * 60 * 24));
-                if (nodays == 0) {
-                    nodays = 1;
+                while (rs.next()) {
+                    model.addRow(new Object[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9),
+                        rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16)  });
                 }
-                txtDays.setText(String.valueOf(nodays));
-                float price = Float.parseFloat(txtPrice.getText());
 
-                txtTotal.setText(String.valueOf(nodays * price));
-                txtEmail.setText(rs.getString(6));
-                roomtype = rs.getNString(12);
-                bed = rs.getNString(11);
-            } else {
+                rs.close();
 
-                JOptionPane.showMessageDialog(null, "Room Number is not Booked or Does not Exist");
+            } catch (Exception e) {
+
+                e.printStackTrace();
             }
+            
+            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
 
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        
+        
+         try {
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotelmanage", "root", "12345678");
+
+            String qry = "SELECT * FROM customer where  checkout is not null";
+            ps = conn.prepareStatement(qry);
+
+            rs = ps.executeQuery();
+
+            DefaultTableModel model = (DefaultTableModel) tblCus.getModel();
+            model.setRowCount(0);
+            try {
+
+                while (rs.next()) {
+                    model.addRow(new Object[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9),
+                        rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16)  });
+                }
+
+                rs.close();
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+            }
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, "");
+        }
+
+    }//GEN-LAST:event_formComponentShown
+
+    private void tblCusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCusMouseClicked
+        
+        int index=tblCus.getSelectedRow();
+        TableModel model=tblCus.getModel();
+        String id=model.getValueAt(index,0).toString();
+        try {
+//             if(new File("D:\\"+id+".pdf").exists()){
+//                        Process p=Runtime.getRuntime().exec("rundl132 url.dll,FileProtocolHandler D:\\"+id+".pdf");
+//                    }else{
+//                        System.out.println("File is not exists.");
+//                    }
+            File file = new File("D:\\" + id + ".pdf");
+            if (file.exists()) {
+                Desktop desktop = Desktop.getDesktop();
+                desktop.open(file);
+            } else {
+                System.out.println("File does not exist.");
+            }
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e);
+        }
+        
+        
+    }//GEN-LAST:event_tblCusMouseClicked
 
     /**
      * @param args the command line arguments
@@ -232,8 +371,14 @@ public class Bill extends javax.swing.JFrame {
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField txtRno;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblCus;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
