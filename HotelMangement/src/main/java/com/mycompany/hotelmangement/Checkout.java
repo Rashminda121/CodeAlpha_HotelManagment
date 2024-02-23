@@ -379,7 +379,7 @@ public class Checkout extends javax.swing.JFrame {
                     .addComponent(btnClear))
                 .addGap(41, 41, 41)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -510,7 +510,7 @@ public class Checkout extends javax.swing.JFrame {
                 doc.add(p2);
                 p2=new Paragraph("****************************************************************");
                 doc.add(p2);
-                p2=new Paragraph("\tRoom Details:\nCNumber:"+roomNo+"\nType: "+roomtype+"\nBed: "+bed+"\nPrice for day: "+price+"");
+                p2=new Paragraph("\tRoom Details:\nNumber:"+roomNo+"\nType: "+roomtype+"\nBed: "+bed+"\nPrice for day: "+price+"");
                 doc.add(p2);
                 p2=new Paragraph("****************************************************************");
                 doc.add(p2);
