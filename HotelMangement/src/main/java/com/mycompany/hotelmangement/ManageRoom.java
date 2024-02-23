@@ -463,7 +463,7 @@ public class ManageRoom extends javax.swing.JFrame {
                 
             } else {
 
-                JOptionPane.showMessageDialog(null, "Invalid Serach");
+                JOptionPane.showMessageDialog(null, "Invalid Search");
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
