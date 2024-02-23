@@ -234,7 +234,8 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogout2ActionPerformed
 
     private void btnLogout3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogout3ActionPerformed
-        // TODO add your handling code here:
+        setVisible(false);
+        new Bill().setVisible(true);
     }//GEN-LAST:event_btnLogout3ActionPerformed
 
     private void btnLogout4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogout4ActionPerformed
